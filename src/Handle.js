@@ -43,7 +43,7 @@ var Handle = React.createClass({
       WebkitTapHighlightColor: "rgba(0,0,0,0)"
     };
 
-    return <g style={style} {...events}>
+    return <g className={props.className} style={style} {...events}>
       <circle
         key="1"
         cx={x}

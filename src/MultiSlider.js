@@ -1,4 +1,5 @@
 var React = require("react");
+var ReactDOM = require("react-dom");
 var uncontrollable = require("uncontrollable");
 var Handle = require("./Handle");
 var Track = require("./Track");
@@ -14,6 +15,7 @@ var MultiSlider = React.createClass({
 
   propTypes: {
     colors: PropTypes.arrayOf(PropTypes.string),
+    className: PropTypes.string,
     values: PropTypes.arrayOf(PropTypes.number),
     onChange: PropTypes.func,
     width: PropTypes.number,
@@ -47,7 +49,7 @@ var MultiSlider = React.createClass({
   },
 
   xForEvent: function (e) {
-    var node = this.getDOMNode();
+    var node = ReactDOM.findDOMNode(this);
     var clientX = e.clientX;
     var m = node.getScreenCTM();
     var p = node.createSVGPoint();
@@ -188,16 +190,20 @@ var MultiSlider = React.createClass({
       var fromX = this.x(prev);
       var toX = this.x(next);
       var color = colors[i % colors.length];
-      tracks.push(
-        <Track
-          key={i}
-          color={color}
-          y={centerY}
-          lineWidth={trackSize}
-          fromX={fromX}
-          toX={toX}
-        />
-      );
+
+      if(fromX !== toX) {
+        tracks.push(
+          <Track
+            key={i}
+            color={color}
+            y={centerY}
+            lineWidth={trackSize}
+            fromX={fromX}
+            toX={toX}
+          />
+        );
+      }
+
       if (i !== 0) {
         var handleEvents = {};
         if (touchEvents) {
@@ -215,6 +221,7 @@ var MultiSlider = React.createClass({
         }
         handles.push(
           <Handle
+            className={props.className}
             key={i}
             active={down && down.controlled === i}
             x={fromX}

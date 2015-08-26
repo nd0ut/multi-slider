@@ -14,7 +14,7 @@
   "author": "Gaëtan Renaudeau <renaudeau.gaetan@gmail.com>",
   "license": "ISC",
   "peerDependencies": {
-    "react": "*"
+    "react": "* || 0.14.0-beta3"
   },
   "dependencies": {
     "object-assign": "^2.0.0",

@@ -15,7 +15,6 @@ var Track = React.createClass({
       y2={y}
       strokeWidth={lineWidth}
       stroke={color}
-      strokeLinecap="round"
     />;
   }
 });
